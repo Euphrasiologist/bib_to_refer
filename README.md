@@ -4,7 +4,7 @@
 
 BibTeX files look something like this:
 
-@Article{RN298,
+`@Article{RN298,
    author = {Abbott, R. J.},
    title = {LIFE-HISTORY VARIATION ASSOCIATED WITH THE POLYMORPHISM FOR CAPITULUM TYPE AND OUTCROSSING RATE IN SENECIO-VULGARIS L},
    journal = {Heredity},
@@ -15,7 +15,7 @@ BibTeX files look something like this:
    url = {<Go to ISI>://WOS:A1986C827000012},
    year = {1986},
    type = {Journal Article}
-}
+}`
   
 The output of the script produces:
 
