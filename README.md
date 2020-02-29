@@ -4,28 +4,28 @@
 
 BibTeX files look something like this:
 
-`@Article{RN298,
-   author = {Abbott, R. J.},
-   title = {LIFE-HISTORY VARIATION ASSOCIATED WITH THE POLYMORPHISM FOR CAPITULUM TYPE AND OUTCROSSING RATE IN SENECIO-VULGARIS L},
-   journal = {Heredity},
-   volume = {56},
-   pages = {381-391},
-   ISSN = {0018-067X},
-   DOI = {10.1038/hdy.1986.60},
-   url = {<Go to ISI>://WOS:A1986C827000012},
-   year = {1986},
-   type = {Journal Article}
-}`
+@Article{RN298,\
+   author = {Abbott, R. J.},\
+   title = {LIFE-HISTORY VARIATION ASSOCIATED WITH THE POLYMORPHISM FOR CAPITULUM TYPE AND OUTCROSSING RATE IN SENECIO-VULGARIS L},\
+   journal = {Heredity},\
+   volume = {56},\
+   pages = {381-391},\
+   ISSN = {0018-067X},\
+   DOI = {10.1038/hdy.1986.60},\
+   url = {<Go to ISI>://WOS:A1986C827000012},\
+   year = {1986},\
+   type = {Journal Article}\
+}\
   
 The output of the script produces:
 
-%A Abbott, R. J.
-%D 1986
-%P 381-391
-%V 56
-%J Heredity
-%T Life-History Variation Associated With The Polymorphism For Capitulum Type And Outcrossing Rate In Senecio-Vulgaris L
-%K Life
+%A Abbott, R. J.\
+%D 1986\
+%P 381-391\
+%V 56\
+%J Heredity\
+%T Life-History Variation Associated With The Polymorphism For Capitulum Type And Outcrossing Rate In Senecio-Vulgaris L\
+%K Life\
 
 This can then be used in the GNU troff (groff) and refer unix toolkits for making pretty typeset formatted output, which looks a bit like LaTeX, but much faster (and easier..?).
 
