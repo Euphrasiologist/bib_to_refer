@@ -15,7 +15,7 @@ BibTeX files look something like this:
    url = {<Go to ISI>://WOS:A1986C827000012},\
    year = {1986},\
    type = {Journal Article}\
-}\
+}
   
 The output of the script produces:
 
@@ -25,7 +25,7 @@ The output of the script produces:
 %V 56\
 %J Heredity\
 %T Life-History Variation Associated With The Polymorphism For Capitulum Type And Outcrossing Rate In Senecio-Vulgaris L\
-%K Life\
+%K Life
 
 This can then be used in the GNU troff (groff) and refer unix toolkits for making pretty typeset formatted output, which looks a bit like LaTeX, but much faster (and easier..?).
 
