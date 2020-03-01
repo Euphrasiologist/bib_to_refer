@@ -83,12 +83,20 @@ for bib in bib_database.entries:
     # get the title
     regex3 = re.compile("^%T")
     # extract as string
-    title = list(filter(regex3.match, refer_entries))[0]
-    # extract first word, which may or may not be informative...
-    regex4 = re.compile("^%T ([A-Z][a-z]*)")
-    keyword = ['%K ' + regex4.findall(title)[0]]
-    refer_entries = refer_entries + keyword
+    # need to do something here, if there is no title...
+    # if no title in refer entries, just print without keyword
 
-    for entry in refer_entries:
-        print(entry)
-    print("\n")
+    if any(regex3.match(entry) for entry in refer_entries):
+        title = list(filter(regex3.match, refer_entries))[0]
+        # extract first word, which may or may not be informative...
+        regex4 = re.compile("^%T ([A-Z][a-z]*)")
+        keyword = ['%K ' + regex4.findall(title)[0]]
+        refer_entries = refer_entries + keyword
+
+        for entry in refer_entries:
+            print(entry)
+        print("\n")
+    else:
+        for entry in refer_entries:
+            print(entry)
+        print("\n")
