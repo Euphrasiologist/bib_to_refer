@@ -5,8 +5,10 @@ import argparse
 import re
 
 # sort out the arguments
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Process an input BibTeX file into a refer database.", 
+                                 epilog="Type `man 1 refer` on linux like machines to view the refer manual page.")
 parser.add_argument('filename', help="Input .bib file path.")
+parser.add_argument('--number', type=int, nargs=1, help="Minimum number of records in a refer entry, default 0", default=0)
 args = parser.parse_args()
 
 
@@ -23,6 +25,8 @@ bib_to_refer = {"author":"%A",
                 "number":"%N",
                 "pages":"%P",
                 "year":"%D"}
+# parse the --number flag here
+minimum = args.number
 
     ######################################
 #                 Load database             #
@@ -82,21 +86,25 @@ for bib in bib_database.entries:
     # append the 'keyword' entry to the end of each list, which I am saying is the first word of the title..?
     # get the title
     regex3 = re.compile("^%T")
-    # extract as string
-    # need to do something here, if there is no title...
-    # if no title in refer entries, just print without keyword
 
+    # extract as string
+    # if title exists in refer entries, regex to extract keyword
     if any(regex3.match(entry) for entry in refer_entries):
         title = list(filter(regex3.match, refer_entries))[0]
+
         # extract first word, which may or may not be informative...
+        # TODO add custom keyword option (perhaps another regex on the title.)
         regex4 = re.compile("^%T ([A-Z][a-z]*)")
         keyword = ['%K ' + regex4.findall(title)[0]]
         refer_entries = refer_entries + keyword
 
-        for entry in refer_entries:
-            print(entry)
-        print("\n")
+        if len(refer_entries) > minimum[0]:
+            for entry in refer_entries:
+                print(entry)
+            print("\n")
+    # else no title, no keyword.
     else:
-        for entry in refer_entries:
-            print(entry)
-        print("\n")
+        if len(refer_entries) > minimum[0]:
+            for entry in refer_entries:
+                print(entry)
+            print("\n")
