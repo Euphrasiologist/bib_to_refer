@@ -31,13 +31,15 @@ This can then be used in the GNU troff (groff) and refer unix toolkits for makin
 
 ### Usage
 
-A python script is provided which takes a single argumet, specifying a path to a .bib file.
+A python script is provided which takes a mandatory argument, specifying a path to a .bib file and an optional argument which filters the final refer record based upon a minimum number of entries. Use `-h` flag for more information.
 
-`python bib_to_refer.py /path/to/bib.bib`
+`python bib_to_refer.py [-h] [--number NUMBER] filename`
 
 By default it prints to the console, so it is best to pass it to a simple text file.
 
 `python bib_to_refer.py /path/to/bib.bib > refer_database.txt`
+
+### Dependencies
 
 The script depends on `bibtexparser`, a cool module that allows for parsing of BibTeX files, `argparse` which allows for pretty command line interface and `re` for regular expressions.
 
