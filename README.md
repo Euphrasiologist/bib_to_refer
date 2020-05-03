@@ -31,7 +31,9 @@ This can then be used in the GNU troff (groff) and refer unix toolkits for makin
 
 ### Usage
 
-A python script is provided which takes a single argumet, specifying a path to a .bib file.
+There is an implementation in python, and one in JavaScript, so it can be easily manipulated in the browser.
+
+The python script provided takes a single argumet, specifying a path to a .bib file.
 
 `python bib_to_refer.py /path/to/bib.bib`
 
@@ -41,4 +43,4 @@ By default it prints to the console, so it is best to pass it to a simple text f
 
 The script depends on `bibtexparser`, a cool module that allows for parsing of BibTeX files, `argparse` which allows for pretty command line interface and `re` for regular expressions.
 
-
+The JavaScript script is an export of the 'Refer' object. I think it will run like Refer.parse(refer_database_file).
