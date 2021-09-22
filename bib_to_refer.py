@@ -12,10 +12,6 @@ parser.add_argument('--number', type=int, nargs=1, help="Minimum number of recor
 args = parser.parse_args()
 
 
-    ######################################
-#                 Dictionary                #
-    ######################################
-
 # more can be added here, if necessary. I think these are the 
 # only ones that are actually processed by refer.
 bib_to_refer = {"author":"%A",
@@ -28,38 +24,37 @@ bib_to_refer = {"author":"%A",
 # parse the --number flag here
 minimum = args.number
 
-    ######################################
-#                 Load database             #
-    ######################################
-
 # load the bib database
 with open(args.filename) as bibtex_file:
     bib_database = bibtexparser.load(bibtex_file)
 
     ######################################
-#                 Begin loop                #
-    ######################################
-
 # loop through each bib entry
 for bib in bib_database.entries:
     # shows which keys are in both bib and bib_to_refer
     common_keys = [key for key, value in bib.items() if key in bib_to_refer]
-    
+
     # create dictionary of key and value from key in large dictionary if key is present in common keys.
-    subset_dict = dict((key, bib[key]) for key in common_keys if key in bib)
+    subset_dict = {key: bib[key] for key in common_keys if key in bib}
 
     # a keyerror throws if bib_to_refer is not trimmed to match
-    subset_bib_to_refer = dict((key, bib_to_refer[key]) for key in common_keys if key in bib_to_refer)
+    subset_bib_to_refer = {
+        key: bib_to_refer[key] for key in common_keys if key in bib_to_refer
+    }
+
 
     # now to replace the keys in subset_dict with keys from bib_to_refer
-    subset_dict_refer = dict((value,subset_dict[key]) for (key, value) in subset_bib_to_refer.items())
+    subset_dict_refer = {
+        value: subset_dict[key] for (key, value) in subset_bib_to_refer.items()
+    }
+
 
     # lastly split %A records with multiple authors. 
     # first turn subset_dict_refer into a list
-    subset_dict_refer_ls = []
-    for key, value in subset_dict_refer.items():
-        subset_dict_refer_ls.append(key + " " + value)
-    
+    subset_dict_refer_ls = [
+        key + " " + value for key, value in subset_dict_refer.items()
+    ]
+
     # second, match and extract %A
     regex1 = re.compile("%A")
     sort_authors = list(filter(regex1.match, subset_dict_refer_ls))
@@ -96,15 +91,9 @@ for bib in bib_database.entries:
         # TODO add custom keyword option (perhaps another regex on the title.)
         regex4 = re.compile("^%T ([A-Z][a-z]*)")
         keyword = ['%K ' + regex4.findall(title)[0]]
-        refer_entries = refer_entries + keyword
+        refer_entries += keyword
 
-        if len(refer_entries) > minimum[0]:
-            for entry in refer_entries:
-                print(entry)
-            print("\n")
-    # else no title, no keyword.
-    else:
-        if len(refer_entries) > minimum[0]:
-            for entry in refer_entries:
-                print(entry)
-            print("\n")
+    if len(refer_entries) > minimum[0]:
+        for entry in refer_entries:
+            print(entry)
+        print("\n")
